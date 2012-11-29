@@ -13,6 +13,8 @@
 @synthesize hai;
 @synthesize used;
 
+static NSArray* haiImageArray;
+
 - (Tehai*)init {
     Tehai* tehai = [super init];
     tehai.hai = (int*)malloc(sizeof(int) * HAI_LENGTH);
@@ -75,7 +77,7 @@
     return tehai;
 }
 
-- (void)toString {
+- (void)logTehai {
     NSMutableString* str = [NSMutableString string];
     for(int i=0;i<HAI_LENGTH;i++){
         for(int j=0;j<hai[i];j++){
@@ -85,6 +87,19 @@
     }
     
     NSLog(@"%@",str);
+}
+
++ (NSArray*)getHaiImageArray:(int)haitype {
+    
+    if( haiImageArray == NULL ){
+        haiImageArray = [NSArray arrayWithObjects:
+                         [NSArray arrayWithObjects:@"",@"m1.gif",@"m2.gif",@"m3.gif",@"m4.gif",@"m5.gif",@"m6.gif",@"m7.gif",@"m8.gif",@"m9.gif",nil],
+                         [NSArray arrayWithObjects:@"",@"p1.gif",@"p2.gif",@"p3.gif",@"p4.gif",@"p5.gif",@"p6.gif",@"p7.gif",@"p8.gif",@"p9.gif",nil],
+                         [NSArray arrayWithObjects:@"",@"s1.gif",@"s2.gif",@"s3.gif",@"s4.gif",@"s5.gif",@"s6.gif",@"s7.gif",@"s8.gif",@"s9.gif",nil],
+                         [NSArray arrayWithObjects:@"",@"j1.gif",@"j2.gif",@"j3.gif",@"j4.gif",@"j5.gif",@"j6.gif",@"j7.gif",nil],nil];
+    }
+    
+    return [haiImageArray objectAtIndex:haitype];
 }
 
 @end

@@ -11,6 +11,8 @@
 #import "Tehai.h"
 #import "TenpaiChecker.h"
 
+#define CHOICE_HAI_TAG_BASE 100
+
 @interface GameViewController ()
 
 @end
@@ -19,6 +21,7 @@
 
 @synthesize choiceHaiImage;
 @synthesize tehaiImage;
+@synthesize choice;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,29 +37,22 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
-    
-    
-    
     choiceHaiImage = [choiceHaiImage sortedArrayUsingSelector:@selector(compare:)];
-    
     tehaiImage = [tehaiImage sortedArrayUsingSelector:@selector(compare:)];
     
-    Tehai* tehai = [[Tehai alloc] init];
+    choice = (BOOL*)malloc(sizeof(BOOL) * HAI_LENGTH);
+    for(int i=0;i<HAI_LENGTH;i++){
+        choice[i] = false;
+    }
     
-//    [tehai initialhai];
+    Tehai* tehai = [[Tehai alloc] init];
     [tehai haipai];
-//    [tehai toString];
-
-    Tehai* tehai2 = [tehai copyTehai];
-//    [tehai2 toString];
-    [tehai2 haipai];
-    [tehai2 toString];
     
     TenpaiChecker* checker = [[TenpaiChecker alloc] init];
-    BOOL* machi = [checker checkMachihai:tehai2];
+    BOOL* machi = [checker checkMachihai:tehai];
     
-    [tehai2 toString];
+    
+    [tehai logTehai];
     for(int i=0;i<HAI_LENGTH;i++){
         if(machi[i] == true){
             NSLog(@"待ち牌：%d",i);
@@ -64,20 +60,72 @@
     }
     
     
-    UIImageView* imageView = [choiceHaiImage objectAtIndex:0];
-    imageView.image = [UIImage imageNamed:@"s1.gif"];
+    [self initChoiceHai];
+    
+    [self viewTehai:tehai];
+    
+    
+}
 
-    UIImageView* imageView2 = [choiceHaiImage objectAtIndex:5];
-    imageView2.image = [UIImage imageNamed:@"s6.gif"];
-    
-    UIImageView* imageView3 = [tehaiImage objectAtIndex:5];
-    imageView3.image = [UIImage imageNamed:@"p4.gif"];
+- (void)initChoiceHai {
+    NSArray* haiImageArray = [Tehai getHaiImageArray:HAI_TYPE_SOUZU];
 
-    UIImageView* imageView4 = [tehaiImage objectAtIndex:12];
-    imageView4.image = [UIImage imageNamed:@"j6.gif"];
+    for (int i=0;i<9;i++) {
+        UIImageView* choiceHaiImageView = [choiceHaiImage objectAtIndex:i];
+        choiceHaiImageView.image = [UIImage imageNamed:[haiImageArray objectAtIndex:i+1]];
+        // タッチイベント用
+        choiceHaiImageView.userInteractionEnabled = YES;
+    }
     
+    [self updateChoiceHai];
+}
+
+- (void)updateChoiceHai {
+    for (int i=0;i<9;i++) {
+        UIImageView* choiceHaiImageView = [choiceHaiImage objectAtIndex:i];
+        
+        if(choice[i+1]==true){
+            choiceHaiImageView.alpha = 1;
+        } else {
+            choiceHaiImageView.alpha = 0.4;
+        }
+    }
+}
+
+- (void)viewTehai:(Tehai*)tehai {
+    NSArray* haiImageArray = [Tehai getHaiImageArray:HAI_TYPE_MANZU];
+    NSArray* jihaiImageArray = [Tehai getHaiImageArray:HAI_TYPE_JIHAI];
     
+    int num = 0;
+    for (int i=1;i<=9;i++) {
+        for(int j=0;j<tehai.hai[i];j++){
+            UIImageView* tehaiImageView = [tehaiImage objectAtIndex:num];
+            tehaiImageView.image = [UIImage imageNamed:[haiImageArray objectAtIndex:i]];
+            num++;
+        }
+    }
     
+    int jihaiType = rand() % 7 + 1;
+    for(int i=0;i<tehai.hai[0];i++){
+        UIImageView* tehaiImageView = [tehaiImage objectAtIndex:num];
+        tehaiImageView.image = [UIImage imageNamed:[jihaiImageArray objectAtIndex:jihaiType]];
+        num++;
+    }
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch* touch = [[event allTouches] anyObject];
+    int tag = touch.view.tag;
+    
+    if( tag > CHOICE_HAI_TAG_BASE && tag <= CHOICE_HAI_TAG_BASE + 9){
+        int touchNum = tag - CHOICE_HAI_TAG_BASE;
+        if(choice[touchNum] == true){
+            choice[touchNum] = false;
+        } else {
+            choice[touchNum] = true;
+        }
+        [self updateChoiceHai];
+    }
     
 }
 

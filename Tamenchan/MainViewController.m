@@ -26,8 +26,4 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)startbutton:(id)sender {
-    _message.text = @"Tamenchan!";
-}
-
 @end

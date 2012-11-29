@@ -14,14 +14,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *choiceHaiImage;
 
-
-
-
-
-
-
-
-
+@property BOOL* choice;
 
 
 - (IBAction)backButton:(id)sender;

@@ -11,6 +11,11 @@
 #define HAI_LENGTH 10
 #define TEHAI_LENGTH 13
 
+#define HAI_TYPE_MANZU 0
+#define HAI_TYPE_PINZU 1
+#define HAI_TYPE_SOUZU 2
+#define HAI_TYPE_JIHAI 3
+
 @interface Tehai : NSObject
 
 @property NSMutableArray* hai2;
@@ -25,6 +30,8 @@
 - (void)putTehai:(int*)targethai;
 - (Tehai*)copyTehai;
 
-- (void)toString;
+- (void)logTehai;
+
++ (NSArray*)getHaiImageArray:(int)haitype;
 
 @end

@@ -10,8 +10,4 @@
 
 @interface MainViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *message;
-
-- (IBAction)startbutton:(id)sender;
-
 @end
