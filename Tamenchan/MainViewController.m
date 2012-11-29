@@ -6,13 +6,13 @@
 //  Copyright (c) 2012年 Tatsuo Fujiwara. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 
-@interface ViewController ()
+@interface MainViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 - (void)viewDidLoad
 {
@@ -24,6 +24,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)startbutton:(id)sender {
+    _message.text = @"Tamenchan!";
 }
 
 @end

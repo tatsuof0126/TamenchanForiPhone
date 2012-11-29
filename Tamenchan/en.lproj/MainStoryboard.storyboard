@@ -1,23 +1,429 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="2" customClass="MainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hello world" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KGp-Qm-V08">
+                                <rect key="frame" x="118" y="420" width="85" height="21"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="laz-dv-NwB">
+                                <rect key="frame" x="87" y="473" width="130" height="44"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="スタートボタン">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startbutton:" destination="2" eventType="touchUpInside" id="V0H-2a-m4C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bNg-Zf-uCp">
+                                <rect key="frame" x="95" y="150" width="130" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="ゲームスタート">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BKL-47-KRJ" kind="modal" modalTransitionStyle="crossDissolve" id="zWz-3l-8eS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hgV-tm-bzm">
+                                <rect key="frame" x="110" y="240" width="100" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="ハイスコア">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="63h-cf-3B7" kind="modal" modalTransitionStyle="crossDissolve" id="9gA-XZ-zA9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ANa-dv-xPE">
+                                <rect key="frame" x="110" y="320" width="100" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="アプリ設定">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="zgG-jW-moE" kind="modal" modalTransitionStyle="crossDissolve" id="2h3-vA-7uf"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="message" destination="KGp-Qm-V08" id="SbB-Q9-Y4W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Game View Controller-->
+        <scene sceneID="XKr-qg-EQQ">
+            <objects>
+                <viewController id="BKL-47-KRJ" customClass="GameViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BmS-5T-6Pb">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="m1.gif" id="SnR-AG-85c">
+                                <rect key="frame" x="25" y="150" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bk.gif" id="xRX-cb-kfR">
+                                <rect key="frame" x="5" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" image="bk.gif" id="lI6-Z6-6xL">
+                                <rect key="frame" x="29" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" image="bk.gif" id="ay4-jb-nyv">
+                                <rect key="frame" x="101" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" image="bk.gif" id="bUE-sX-IDg">
+                                <rect key="frame" x="125" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="bk.gif" id="ZyB-cm-ZaA">
+                                <rect key="frame" x="173" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" image="bk.gif" id="ZHz-S2-MkL">
+                                <rect key="frame" x="149" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="8" contentMode="scaleToFill" image="bk.gif" id="kXS-BV-VmM">
+                                <rect key="frame" x="197" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="9" contentMode="scaleToFill" image="bk.gif" id="uiD-0N-qy8">
+                                <rect key="frame" x="221" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" image="bk.gif" id="aSQ-kR-eo6">
+                                <rect key="frame" x="245" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="11" contentMode="scaleToFill" image="bk.gif" id="eF1-g7-bX0">
+                                <rect key="frame" x="269" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="12" contentMode="scaleToFill" image="bk.gif" id="zmC-IM-ZGn">
+                                <rect key="frame" x="293" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="bk.gif" id="Ysv-Uz-xJx">
+                                <rect key="frame" x="53" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="bk.gif" id="KNX-40-9DN">
+                                <rect key="frame" x="77" y="83" width="24" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" image="m2.gif" id="hqV-or-bBN">
+                                <rect key="frame" x="85" y="150" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="m3.gif" id="KUm-VG-Hei">
+                                <rect key="frame" x="145" y="150" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="m4.gif" id="5u8-7V-Iie">
+                                <rect key="frame" x="205" y="150" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" image="m5.gif" id="IJc-b7-YtF">
+                                <rect key="frame" x="265" y="150" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" image="m6.gif" id="gAZ-TX-dNm">
+                                <rect key="frame" x="55" y="222" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" image="m7.gif" id="w9J-0o-2oX">
+                                <rect key="frame" x="115" y="222" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" image="m8.gif" id="xWS-rP-rIt">
+                                <rect key="frame" x="175" y="222" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="8" contentMode="scaleToFill" image="m9.gif" id="ao8-X4-xp6">
+                                <rect key="frame" x="236" y="222" width="33" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="177-RV-NWt">
+                                <rect key="frame" x="115" y="320" width="93" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="判定">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="judgeButton:" destination="BKL-47-KRJ" eventType="touchUpInside" id="Crd-Tp-oNz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4KA-H3-0hb">
+                                <rect key="frame" x="269" y="12" width="40" height="31"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <state key="normal" title="戻る">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="BKL-47-KRJ" eventType="touchUpInside" id="BCs-FJ-Ic7"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="この手牌は何待ち？" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xxY-T9-waD">
+                                <rect key="frame" x="5" y="52" width="153" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="問題  2 / 5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1MS-A4-JKU">
+                                <rect key="frame" x="5" y="16" width="100" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="得点 : 100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kq1-2t-mAG">
+                                <rect key="frame" x="125" y="16" width="100" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.52071521698972778" green="0.84608179209183676" blue="0.41567281938843348" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="choiceHaiImage" destination="IJc-b7-YtF" id="jdP-4r-AvG"/>
+                        <outletCollection property="choiceHaiImage" destination="5u8-7V-Iie" id="CoJ-IF-8fM"/>
+                        <outletCollection property="choiceHaiImage" destination="SnR-AG-85c" id="mNM-BP-Ayk"/>
+                        <outletCollection property="choiceHaiImage" destination="KUm-VG-Hei" id="K30-PC-ulO"/>
+                        <outletCollection property="choiceHaiImage" destination="ao8-X4-xp6" id="ujd-5e-ZXF"/>
+                        <outletCollection property="choiceHaiImage" destination="w9J-0o-2oX" id="Q2F-uw-iOa"/>
+                        <outletCollection property="choiceHaiImage" destination="gAZ-TX-dNm" id="R82-QS-DPU"/>
+                        <outletCollection property="choiceHaiImage" destination="hqV-or-bBN" id="98c-ZU-98T"/>
+                        <outletCollection property="choiceHaiImage" destination="xWS-rP-rIt" id="dOv-YM-xuK"/>
+                        <outletCollection property="tehaiImage" destination="uiD-0N-qy8" id="8om-wv-TaP"/>
+                        <outletCollection property="tehaiImage" destination="ZyB-cm-ZaA" id="Qt4-Ek-DZl"/>
+                        <outletCollection property="tehaiImage" destination="zmC-IM-ZGn" id="DBO-xS-xMh"/>
+                        <outletCollection property="tehaiImage" destination="xRX-cb-kfR" id="zfE-hY-Bha"/>
+                        <outletCollection property="tehaiImage" destination="KNX-40-9DN" id="vW0-Nj-7X9"/>
+                        <outletCollection property="tehaiImage" destination="Ysv-Uz-xJx" id="qe0-sd-uIC"/>
+                        <outletCollection property="tehaiImage" destination="ZHz-S2-MkL" id="EG5-tr-cjY"/>
+                        <outletCollection property="tehaiImage" destination="aSQ-kR-eo6" id="HyK-VH-YQP"/>
+                        <outletCollection property="tehaiImage" destination="lI6-Z6-6xL" id="5kR-ae-pEt"/>
+                        <outletCollection property="tehaiImage" destination="kXS-BV-VmM" id="4Z2-wP-jBC"/>
+                        <outletCollection property="tehaiImage" destination="eF1-g7-bX0" id="Zlf-eS-yW5"/>
+                        <outletCollection property="tehaiImage" destination="ay4-jb-nyv" id="cai-ZJ-FLq"/>
+                        <outletCollection property="tehaiImage" destination="bUE-sX-IDg" id="bWC-Vp-cfg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l5P-a1-VJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="-196"/>
+        </scene>
+        <!--Config View Controller-->
+        <scene sceneID="dMz-ZQ-PwW">
+            <objects>
+                <viewController id="zgG-jW-moE" customClass="ConfigViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fbl-tY-6pG">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="tqL-te-ZnU">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="アプリ設定" id="uKb-5A-PwY">
+                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="QAt-LF-oYK">
+                                            <connections>
+                                                <action selector="backButton:" destination="zgG-jW-moE" id="B6T-Aj-AUM"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="m1.gif" id="BtO-gO-KDN">
+                                <rect key="frame" x="50" y="100" width="47" height="64"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SWZ-VB-ZVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="326" y="1013"/>
+        </scene>
+        <!--Our Hiscore View Controller - みんなのハイスコア-->
+        <scene sceneID="Zut-a9-IvO">
+            <objects>
+                <viewController id="Cf7-aZ-GMC" customClass="OurHiscoreViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5H8-3s-orD">
+                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="wMB-Nv-KBO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="みんなのハイスコア" id="EHf-FM-n8T">
+                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="IR0-ci-5at"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="みんなのハイスコア" id="45V-kG-AJI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Fo-mZ-6fe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1601" y="1223"/>
+        </scene>
+        <!--My Hiscore View Controller - 私のハイスコア-->
+        <scene sceneID="aqG-eZ-ssb">
+            <objects>
+                <viewController id="TG0-7h-VTu" customClass="MyHiscoreViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cq9-ho-j0I">
+                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="Qie-ew-bKI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="私のハイスコア" id="OqZ-UK-7HS">
+                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="QpY-U8-OmO">
+                                            <connections>
+                                                <action selector="backButton:" destination="TG0-7h-VTu" id="lM8-ul-LnP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="私のハイスコア" id="WFB-hH-eQt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S1Q-Zs-0SD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1601" y="510"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="OfM-Ql-cza">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="63h-cf-3B7" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="JtE-NQ-DEe">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="TG0-7h-VTu" kind="relationship" relationship="viewControllers" id="OoM-vl-gwA"/>
+                        <segue destination="Cf7-aZ-GMC" kind="relationship" relationship="viewControllers" id="mXM-ri-0gk"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JtX-SK-ZLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="589"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="bk.gif" width="33" height="59"/>
+        <image name="m1.gif" width="47" height="63"/>
+        <image name="m2.gif" width="47" height="63"/>
+        <image name="m3.gif" width="47" height="63"/>
+        <image name="m4.gif" width="47" height="63"/>
+        <image name="m5.gif" width="47" height="63"/>
+        <image name="m6.gif" width="47" height="63"/>
+        <image name="m7.gif" width="47" height="63"/>
+        <image name="m8.gif" width="47" height="63"/>
+        <image name="m9.gif" width="47" height="63"/>
+    </resources>
+    <classes>
+        <class className="ConfigViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButton:"/>
+            </relationships>
+        </class>
+        <class className="GameViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GameViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButton:"/>
+                <relationship kind="action" name="judgeButton:"/>
+                <relationship kind="outletCollection" name="choiceHaiImage" candidateClass="UIImageView"/>
+                <relationship kind="outletCollection" name="tehaiImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="startbutton:"/>
+                <relationship kind="outlet" name="message" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MyHiscoreViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyHiscoreViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButton:"/>
+            </relationships>
+        </class>
+        <class className="OurHiscoreViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OurHiscoreViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButton:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
