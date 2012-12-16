@@ -29,9 +29,12 @@
 - (void)shihai;
 - (void)putTehai:(int*)targethai;
 - (Tehai*)copyTehai;
+- (NSArray*)getRamdomHaiArray;
 
 - (void)logTehai;
 
 + (NSArray*)getHaiImageArray:(int)haitype;
+
++ (int*)getPresetJihai3;
 
 @end

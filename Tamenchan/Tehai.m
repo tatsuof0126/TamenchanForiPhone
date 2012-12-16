@@ -15,6 +15,8 @@
 
 static NSArray* haiImageArray;
 
+static int* presetjihai3;
+
 - (Tehai*)init {
     Tehai* tehai = [super init];
     tehai.hai = (int*)malloc(sizeof(int) * HAI_LENGTH);
@@ -26,7 +28,7 @@ static NSArray* haiImageArray;
     [self haipai:NULL];
 }
 
-- (void)haipai:(int*)presethai {    
+- (void)haipai:(int*)presethai {
     [self shihai];
 
     int num = 0;
@@ -42,7 +44,7 @@ static NSArray* haiImageArray;
     }
     
     for(int i=num;i<TEHAI_LENGTH;i++){
-        while (TRUE) {
+        while (YES) {
             int tsumo = rand()%36+4;
             if(used[tsumo] == false){
                 hai[(int)(tsumo/4)]++;
@@ -55,8 +57,6 @@ static NSArray* haiImageArray;
 }
 
 - (void)shihai {
-    srand([[NSDate date] timeIntervalSinceReferenceDate]);
-    
     for(int i=0;i<HAI_LENGTH;i++){
         hai[i] = 0;
     }
@@ -75,6 +75,28 @@ static NSArray* haiImageArray;
     Tehai* tehai = [[Tehai alloc] init];
     [tehai putTehai:hai];
     return tehai;
+}
+
+- (NSArray*)getRamdomHaiArray {
+    NSMutableArray* retArray = [NSMutableArray array];
+    
+    NSMutableArray* firstArray = [NSMutableArray array];
+    int num = 0;
+    for(int i=0;i<=9;i++) {
+        for(int j=0;j<hai[i];j++){
+            [firstArray addObject:[NSNumber numberWithInt:i]];
+            num++;
+        }
+    }
+    
+    for(int i=0;i<13;i++){
+        int index = rand() % [firstArray count];
+        NSNumber* number = [firstArray objectAtIndex:index];
+        [firstArray removeObjectAtIndex:index];
+        [retArray addObject:number];
+    }
+    
+    return retArray;
 }
 
 - (void)logTehai {
@@ -100,6 +122,18 @@ static NSArray* haiImageArray;
     }
     
     return [haiImageArray objectAtIndex:haitype];
+}
+
++ (int*)getPresetJihai3 {
+    if(presetjihai3 == NULL){
+        presetjihai3 = (int*)malloc(sizeof(int) * HAI_LENGTH);
+        presetjihai3[0] = 3;
+        for(int i=1;i<HAI_LENGTH;i++){
+            presetjihai3[i] = 0;
+        }
+    }
+    
+    return presetjihai3;
 }
 
 @end

@@ -19,11 +19,14 @@ static NSArray* kotsuTargetArray;
     
     // 受け取った１３枚に１〜９までの牌を１つずつ足して、上がりになるかをチェック
     for (int i=1; i<=9; i++) {
+        // すでに４枚持ってたらその牌で待つことはない。
+        if (targetTehai.hai[i] == 4){
+            machi[i] = false;
+            continue;
+        }
+        
         Tehai* checkTargetTehai = [targetTehai copyTehai];
         checkTargetTehai.hai[i]++;
-        
-//        NSLog(@"チェックターゲット");
-//        [checkTargetTehai logTehai];
         
         machi[i] = [self isAgari:checkTargetTehai];
     }

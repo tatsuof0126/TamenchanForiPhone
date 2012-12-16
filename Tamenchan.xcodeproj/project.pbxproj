@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B968458167764AD004DDBAA /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B968457167764AD004DDBAA /* ResultViewController.m */; };
+		0B96846016776A29004DDBAA /* HiScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B96845F16776A29004DDBAA /* HiScore.m */; };
+		0BA18E0016748B8700DA3C7B /* TamenchanDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA18DFF16748B8700DA3C7B /* TamenchanDefine.m */; };
+		0BA18E041674BED600DA3C7B /* TimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA18E031674BED500DA3C7B /* TimerView.m */; };
 		0BBC72B51631A9ED0065C46C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BBC72B41631A9ED0065C46C /* UIKit.framework */; };
 		0BBC72B71631A9ED0065C46C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BBC72B61631A9ED0065C46C /* Foundation.framework */; };
 		0BBC72B91631A9ED0065C46C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BBC72B81631A9ED0065C46C /* CoreGraphics.framework */; };
@@ -22,6 +26,8 @@
 		0BBC72DB1631A9F10065C46C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BBC72B61631A9ED0065C46C /* Foundation.framework */; };
 		0BBC72E31631A9F10065C46C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BBC72E11631A9F10065C46C /* InfoPlist.strings */; };
 		0BBC72E61631A9F10065C46C /* TamenchanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBC72E51631A9F10065C46C /* TamenchanTests.m */; };
+		0BC2814E167C22C100A27A8B /* HiScoreTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC2814D167C22C100A27A8B /* HiScoreTabController.m */; };
+		0BC28151167DFF9F00A27A8B /* RegisteredHiScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC28150167DFF9D00A27A8B /* RegisteredHiScore.m */; };
 		0BF69187166100AB007D8D39 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF69186166100AB007D8D39 /* ConfigViewController.m */; };
 		0BF69189166100F5007D8D39 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF69188166100F5007D8D39 /* MainViewController.m */; };
 		0BF6918C1661015E007D8D39 /* MyHiscoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF6918B1661015E007D8D39 /* MyHiscoreViewController.m */; };
@@ -100,6 +106,7 @@
 		0BF6922316612CB4007D8D39 /* UIControlAddComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF6922216612CB4007D8D39 /* UIControlAddComparator.m */; };
 		0BF69226166132B0007D8D39 /* Tehai.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF69225166132B0007D8D39 /* Tehai.m */; };
 		0BF69229166132C1007D8D39 /* TenpaiChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF69228166132C1007D8D39 /* TenpaiChecker.m */; };
+		0BF91FA5166A332B00E280EA /* SelectConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF91FA4166A332B00E280EA /* SelectConfigViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +120,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B968456167764AD004DDBAA /* ResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultViewController.h; sourceTree = "<group>"; };
+		0B968457167764AD004DDBAA /* ResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultViewController.m; sourceTree = "<group>"; };
+		0B96845E16776A29004DDBAA /* HiScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiScore.h; sourceTree = "<group>"; };
+		0B96845F16776A29004DDBAA /* HiScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiScore.m; sourceTree = "<group>"; };
+		0BA18DFE16748B8700DA3C7B /* TamenchanDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TamenchanDefine.h; sourceTree = "<group>"; };
+		0BA18DFF16748B8700DA3C7B /* TamenchanDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TamenchanDefine.m; sourceTree = "<group>"; };
+		0BA18E021674BED500DA3C7B /* TimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerView.h; sourceTree = "<group>"; };
+		0BA18E031674BED500DA3C7B /* TimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerView.m; sourceTree = "<group>"; };
 		0BBC72B01631A9ED0065C46C /* Tamenchan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tamenchan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BBC72B41631A9ED0065C46C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0BBC72B61631A9ED0065C46C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -134,6 +149,10 @@
 		0BBC72E21631A9F10065C46C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0BBC72E41631A9F10065C46C /* TamenchanTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TamenchanTests.h; sourceTree = "<group>"; };
 		0BBC72E51631A9F10065C46C /* TamenchanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TamenchanTests.m; sourceTree = "<group>"; };
+		0BC2814C167C22C100A27A8B /* HiScoreTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiScoreTabController.h; sourceTree = "<group>"; };
+		0BC2814D167C22C100A27A8B /* HiScoreTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiScoreTabController.m; sourceTree = "<group>"; };
+		0BC2814F167DFF9B00A27A8B /* RegisteredHiScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredHiScore.h; sourceTree = "<group>"; };
+		0BC28150167DFF9D00A27A8B /* RegisteredHiScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredHiScore.m; sourceTree = "<group>"; };
 		0BF69185166100AB007D8D39 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		0BF69186166100AB007D8D39 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		0BF69188166100F5007D8D39 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -220,6 +239,8 @@
 		0BF69225166132B0007D8D39 /* Tehai.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tehai.m; sourceTree = "<group>"; };
 		0BF69227166132C1007D8D39 /* TenpaiChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenpaiChecker.h; sourceTree = "<group>"; };
 		0BF69228166132C1007D8D39 /* TenpaiChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TenpaiChecker.m; sourceTree = "<group>"; };
+		0BF91FA3166A332B00E280EA /* SelectConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectConfigViewController.h; sourceTree = "<group>"; };
+		0BF91FA4166A332B00E280EA /* SelectConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectConfigViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,22 +307,36 @@
 				0BBC72CC1631A9EF0065C46C /* MainStoryboard.storyboard */,
 				0BBC72CF1631A9EF0065C46C /* MainViewController.h */,
 				0BF69188166100F5007D8D39 /* MainViewController.m */,
+				0BC2814C167C22C100A27A8B /* HiScoreTabController.h */,
+				0BC2814D167C22C100A27A8B /* HiScoreTabController.m */,
 				0BF6918A1661015E007D8D39 /* MyHiscoreViewController.h */,
 				0BF6918B1661015E007D8D39 /* MyHiscoreViewController.m */,
 				0BF6918D1661017F007D8D39 /* OurHiscoreViewController.h */,
 				0BF6918E1661017F007D8D39 /* OurHiscoreViewController.m */,
 				0BF69185166100AB007D8D39 /* ConfigViewController.h */,
 				0BF69186166100AB007D8D39 /* ConfigViewController.m */,
-				0BF691901661035A007D8D39 /* TamenchanSetting.h */,
-				0BF691911661035A007D8D39 /* TamenchanSetting.m */,
+				0BF91FA3166A332B00E280EA /* SelectConfigViewController.h */,
+				0BF91FA4166A332B00E280EA /* SelectConfigViewController.m */,
 				0BF6919316610445007D8D39 /* GameViewController.h */,
 				0BF6919416610445007D8D39 /* GameViewController.m */,
-				0BF6922116612CB4007D8D39 /* UIControlAddComparator.h */,
-				0BF6922216612CB4007D8D39 /* UIControlAddComparator.m */,
+				0B968456167764AD004DDBAA /* ResultViewController.h */,
+				0B968457167764AD004DDBAA /* ResultViewController.m */,
+				0B96845E16776A29004DDBAA /* HiScore.h */,
+				0B96845F16776A29004DDBAA /* HiScore.m */,
+				0BC2814F167DFF9B00A27A8B /* RegisteredHiScore.h */,
+				0BC28150167DFF9D00A27A8B /* RegisteredHiScore.m */,
 				0BF69224166132B0007D8D39 /* Tehai.h */,
 				0BF69225166132B0007D8D39 /* Tehai.m */,
 				0BF69227166132C1007D8D39 /* TenpaiChecker.h */,
 				0BF69228166132C1007D8D39 /* TenpaiChecker.m */,
+				0BF691901661035A007D8D39 /* TamenchanSetting.h */,
+				0BF691911661035A007D8D39 /* TamenchanSetting.m */,
+				0BA18DFE16748B8700DA3C7B /* TamenchanDefine.h */,
+				0BA18DFF16748B8700DA3C7B /* TamenchanDefine.m */,
+				0BA18E021674BED500DA3C7B /* TimerView.h */,
+				0BA18E031674BED500DA3C7B /* TimerView.m */,
+				0BF6922116612CB4007D8D39 /* UIControlAddComparator.h */,
+				0BF6922216612CB4007D8D39 /* UIControlAddComparator.m */,
 			);
 			path = Tamenchan;
 			sourceTree = "<group>";
@@ -605,6 +640,13 @@
 				0BF6922316612CB4007D8D39 /* UIControlAddComparator.m in Sources */,
 				0BF69226166132B0007D8D39 /* Tehai.m in Sources */,
 				0BF69229166132C1007D8D39 /* TenpaiChecker.m in Sources */,
+				0BF91FA5166A332B00E280EA /* SelectConfigViewController.m in Sources */,
+				0BA18E0016748B8700DA3C7B /* TamenchanDefine.m in Sources */,
+				0BA18E041674BED600DA3C7B /* TimerView.m in Sources */,
+				0B968458167764AD004DDBAA /* ResultViewController.m in Sources */,
+				0B96846016776A29004DDBAA /* HiScore.m in Sources */,
+				0BC2814E167C22C100A27A8B /* HiScoreTabController.m in Sources */,
+				0BC28151167DFF9F00A27A8B /* RegisteredHiScore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

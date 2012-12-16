@@ -10,6 +10,14 @@
 
 @interface OurHiscoreViewController : UIViewController
 
+@property BOOL connecting;
+
+@property (strong, nonatomic) UIActivityIndicatorView* actIndView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+- (IBAction)reloadButton:(id)sender;
+
 - (IBAction)backButton:(id)sender;
 
 @end

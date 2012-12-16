@@ -10,6 +10,12 @@
 
 @interface ConfigViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *gamelevelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *haitypeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *haitypeImage;
+
+- (IBAction)configTwitter:(id)sender;
+
 - (IBAction)backButton:(id)sender;
 
 @end

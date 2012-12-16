@@ -7,12 +7,18 @@
 //
 
 #import "ConfigViewController.h"
+#import "SelectConfigViewController.h"
+#import "TamenchanSetting.h"
 
 @interface ConfigViewController ()
 
 @end
 
 @implementation ConfigViewController
+
+@synthesize gamelevelLabel;
+@synthesize haitypeLabel;
+@synthesize haitypeImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,8 +41,44 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (IBAction)configTwitter:(id)sender {
+    NSLog(@"configTwitter");
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSString* segueStr = [segue identifier];
+    
+    SelectConfigViewController *viewController = [segue destinationViewController];
+    if ([segueStr isEqualToString:@"level"] == true) {
+        viewController.selecttype = TYPE_LEVEL;
+    } else if ([segueStr isEqualToString:@"haitype"] == true) {
+        viewController.selecttype = TYPE_HAITYPE;
+    }
+}
+
 - (IBAction)backButton:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    int gamelevel = [TamenchanSetting getGameLevel];
+    int haitype = [TamenchanSetting getHaiType];
+    
+    gamelevelLabel.text = [[TamenchanSetting getGameLevelStringArray] objectAtIndex:gamelevel];
+    haitypeLabel.text = [[TamenchanSetting getHaiTypeStringArray] objectAtIndex:haitype];
+    NSString* imageString = [[TamenchanSetting getHaiTypeImageStringArray] objectAtIndex:haitype];
+    
+    haitypeImage.image = [UIImage imageNamed:imageString];
+}
+
+- (void)viewDidUnload {
+    [self setGamelevelLabel:nil];
+    [self setHaitypeLabel:nil];
+    [self setHaitypeImage:nil];
+    [super viewDidUnload];
+}
 @end

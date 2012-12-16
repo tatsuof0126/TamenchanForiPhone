@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
++ (void)adjustForiPhone5:(UIView*)view;
+
 @end

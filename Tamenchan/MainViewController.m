@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "HiScoreTabController.h"
 
 @interface MainViewController ()
 
@@ -24,6 +25,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ( [[segue identifier] isEqualToString:@"hiscoresegue"] ) {
+        HiScoreTabController* controller = [segue destinationViewController];
+        controller.seguetype = SEGUE_TYPE_MENU;
+    }
 }
 
 @end

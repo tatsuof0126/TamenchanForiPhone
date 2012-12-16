@@ -18,8 +18,18 @@
 
 @interface TamenchanSetting : NSObject
 
-- (int)getGameLevel;
++ (int)getGameLevel;
 
-- (int)getHaiType;
++ (void)setGameLevel:(int)level;
+
++ (NSArray*)getGameLevelStringArray;
+
++ (int)getHaiType;
+
++ (void)setHaiType:(int)haitype;
+
++ (NSArray*)getHaiTypeStringArray;
+
++ (NSArray*)getHaiTypeImageStringArray;
 
 @end
