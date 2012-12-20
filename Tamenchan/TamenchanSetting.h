@@ -22,6 +22,10 @@
 
 + (void)setGameLevel:(int)level;
 
++ (NSString*)getGameLevelString;
+
++ (NSString*)getGameLevelString:(int)gamelevel;
+
 + (NSArray*)getGameLevelStringArray;
 
 + (int)getHaiType;
@@ -31,5 +35,13 @@
 + (NSArray*)getHaiTypeStringArray;
 
 + (NSArray*)getHaiTypeImageStringArray;
+
++ (NSString*)getDeviceId;
+
++ (void)clearDeviceId;
+
++ (BOOL)canSelectHard;
+
++ (void)setSelectHard:(BOOL)selectHard;
 
 @end

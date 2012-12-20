@@ -12,13 +12,22 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) UIActivityIndicatorView* actIndView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *headerButton;
+
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *rankLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *nameLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *scoreLabels;
 
+@property BOOL connecting;
 @property BOOL messageShow;
 
+// @property (weak, nonatomic) IBOutlet UIButton *continueButton;
+
 - (IBAction)backButton:(id)sender;
-- (IBAction)clearButton:(id)sender;
+- (IBAction)headerButton:(id)sender;
+// - (IBAction)clearButton:(id)sender;
+// - (IBAction)continueButton:(id)sender;
 - (IBAction)registButton:(id)sender;
 
 @end

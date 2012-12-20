@@ -47,12 +47,13 @@
     nameLabels = [nameLabels sortedArrayUsingSelector:@selector(compare:)];
     scoreLabels = [scoreLabels sortedArrayUsingSelector:@selector(compare:)];
     
-//    NSLog(@"score : %d",score);
+    // 順位を初期化
+    rank = OUT_OF_RANK;
     
-    rank = OUT_OF_RANK; // 順位を初期化
+    int gamelevel = [TamenchanSetting getGameLevel];
+    hiScoreArray = [NSMutableArray arrayWithArray:[HiScore readHiScore:gamelevel]];
     
-    hiScoreArray = [NSMutableArray arrayWithArray:[HiScore readHiScore:[TamenchanSetting getGameLevel]]];
-    
+    // 何位かをチェック
     for(int i=0;i<[hiScoreArray count];i++){
         HiScore* hiScore = [hiScoreArray objectAtIndex:i];
         if(hiScore.score < score){
@@ -60,23 +61,19 @@
             HiScore* myHiScore = [[HiScore alloc] init];
             myHiScore.name = [HiScore getLastRegistName];
             myHiScore.score = score;
-            myHiScore.date = [[NSDate date] timeIntervalSince1970];
+            myHiScore.date = [NSDate date];
             
             [hiScoreArray insertObject:myHiScore atIndex:i];
             [hiScoreArray removeLastObject];
-            
-//            NSLog(@"%ld",myHiScore.date);
-            
             break;
         }
     }
     
+    // 得点と順位を表示
     showScoreLabel.text = [NSString stringWithFormat:@"得点は%d点でした",score];
     showRankLabel.text = [NSString stringWithFormat:@"%d位になりました",rank];
     
-    scrollView.contentSize = CGSizeMake(320, 500);
-    
-    
+    // ハイスコアを表示
     for(int i=0;i<[hiScoreArray count];i++){
         HiScore* hiScore = [hiScoreArray objectAtIndex:i];
         UILabel* nameLabel = [nameLabels objectAtIndex:i];
@@ -96,10 +93,16 @@
             nameLabel.hidden = YES;
         }
     }
+    scrollView.contentSize = CGSizeMake(320, 500);
     
-    
-    NSLog(@"hogehoge");
-    
+    // 初めて中級で50点を超えた場合は上級を選択できるようにする
+    if(gamelevel == GAMELEVEL_NORMAL && score >= 50 && [TamenchanSetting canSelectHard] == NO){
+        [TamenchanSetting setSelectHard:YES];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"おめでとうございます"
+            message:@"中級で50点以上獲得したため、上級が選択できるようになりました。\nぜひチャレンジしてください。"
+            delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,6 +112,10 @@
 }
 
 - (IBAction)saveButton:(id)sender {
+    if ([myNameField.text isEqualToString:@""] == YES) {
+        return;
+    }
+    
     HiScore* hiScore = [hiScoreArray objectAtIndex:rank-1];
     hiScore.name = myNameField.text;
     
@@ -119,6 +126,11 @@
 }
 
 - (IBAction)saveandtweetButton:(id)sender {
+    if ([myNameField.text isEqualToString:@""] == YES) {
+        return;
+    }
+    
+    // 仮実装
     [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
     
     /*

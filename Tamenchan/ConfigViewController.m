@@ -51,9 +51,9 @@
     NSString* segueStr = [segue identifier];
     
     SelectConfigViewController *viewController = [segue destinationViewController];
-    if ([segueStr isEqualToString:@"level"] == true) {
+    if ([segueStr isEqualToString:@"level"] == YES) {
         viewController.selecttype = TYPE_LEVEL;
-    } else if ([segueStr isEqualToString:@"haitype"] == true) {
+    } else if ([segueStr isEqualToString:@"haitype"] == YES) {
         viewController.selecttype = TYPE_HAITYPE;
     }
 }
@@ -65,10 +65,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    int gamelevel = [TamenchanSetting getGameLevel];
     int haitype = [TamenchanSetting getHaiType];
     
-    gamelevelLabel.text = [[TamenchanSetting getGameLevelStringArray] objectAtIndex:gamelevel];
+    gamelevelLabel.text = [TamenchanSetting getGameLevelString];
     haitypeLabel.text = [[TamenchanSetting getHaiTypeStringArray] objectAtIndex:haitype];
     NSString* imageString = [[TamenchanSetting getHaiTypeImageStringArray] objectAtIndex:haitype];
     

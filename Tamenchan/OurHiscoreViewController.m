@@ -68,30 +68,6 @@
 	@autoreleasepool {
         connecting = YES;
         
-        NSLog(@"doInBackground");
-        
-        /*
-        // SubViewを一旦全削除
-        for (UIView *view in [[scrollView subviews] reverseObjectEnumerator]) {
-            [view removeFromSuperview];
-        }
-         
-        // SubViewを一旦全削除
-        NSArray* subviewArray = [NSArray arrayWithArray:[scrollView subviews]];
-        for (UIView *view in subviewArray){
-            [view removeFromSuperview];
-        }
-        
-        NSArray* subViewArray = [scrollView subviews];
-        for(int i=0;i<[subViewArray count];i++){
-            UIView* view = [subViewArray objectAtIndex:i];
-            [view removeFromSuperview];
-        }
-         
-         NSLog(@"subview deleted");
-         */
-        
-        
         HiScoreTabController* controller = (HiScoreTabController*)self.parentViewController;
         int viewgamelevel = controller.viewgamelevel;
         
@@ -101,19 +77,22 @@
         NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
         
         // URLからJSONデータを取得(NSData)
-        NSData* response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSURLResponse* response;
+        NSError* error;
+        NSData* retData = [NSURLConnection sendSynchronousRequest:request
+                                                returningResponse:&response error:&error];
         
         NSLog(@"response received");
         
         NSArray* regHiScoreArray;
-        NSError* error;
-        if (response != nil) {
-            regHiScoreArray = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableContainers error:&error];
+        NSError* jsonError;
+        if (retData != nil) {
+            regHiScoreArray = [NSJSONSerialization JSONObjectWithData:retData options:NSJSONReadingMutableContainers error:&jsonError];
         } else {
             regHiScoreArray = [NSArray array];
         }
         
-        NSLog(@"error : %@",error);
+        NSLog(@"error : %@",jsonError);
         
         [self updateOurHiScores:regHiScoreArray];
         
@@ -140,20 +119,31 @@
         [registeredHiScoreArray addObject:hiScore];
     }
     
+    NSString* deviceId = [TamenchanSetting getDeviceId];
+    
     for(int i=0;i<[registeredHiScoreArray count];i++){
         RegisteredHiScore* regHiScore = [registeredHiScoreArray objectAtIndex:i];
         
         UILabel* rankLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, i*30, 45, 21)];
         rankLabel.textAlignment = UITextAlignmentCenter;
         rankLabel.text = [NSString stringWithFormat:@"%d位",regHiScore.rank];
+        rankLabel.backgroundColor = self.view.backgroundColor;
         
         UILabel* nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, i*30, 170, 21)];
         nameLabel.textAlignment = UITextAlignmentLeft;
         nameLabel.text = regHiScore.name;
+        nameLabel.backgroundColor = self.view.backgroundColor;
 
         UILabel* scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(245, i*30, 50, 21)];
         scoreLabel.textAlignment = UITextAlignmentRight;
         scoreLabel.text = [NSString stringWithFormat:@"%d点",regHiScore.score];
+        scoreLabel.backgroundColor = self.view.backgroundColor;
+        
+        if([regHiScore.devId isEqualToString:deviceId] == YES){
+            rankLabel.textColor  = [UIColor redColor];
+            nameLabel.textColor  = [UIColor redColor];
+            scoreLabel.textColor = [UIColor redColor];
+        }
         
         [scrollView addSubview:rankLabel];
         [scrollView addSubview:nameLabel];
@@ -167,17 +157,15 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSString* segueStr = [segue identifier];
     SelectConfigViewController *viewController = [segue destinationViewController];
-    if ([segueStr isEqualToString:@"level"] == true) {
+    if ([segueStr isEqualToString:@"level"] == YES) {
         viewController.selecttype = TYPE_VIEW_LEVEL;
     }
 }
 
 - (void)updateTitle {
     HiScoreTabController* controller = (HiScoreTabController*)self.parentViewController;
-    int viewgamelevel = controller.viewgamelevel;
-    
-    NSArray* array = [TamenchanSetting getGameLevelStringArray];
-    titleLabel.text = [NSString stringWithFormat:@"みんなのハイスコア  ＜%@＞",[array objectAtIndex:viewgamelevel]];
+    titleLabel.text = [NSString stringWithFormat:@"みんなのハイスコア  ＜%@＞",
+                       [TamenchanSetting getGameLevelString:controller.viewgamelevel]];
 }
 
 - (void)didReceiveMemoryWarning

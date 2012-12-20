@@ -13,8 +13,6 @@
 #define KEYTYPE_DATE  2
 #define KEYTYPE_REGID 3
 
-#define DEFAULT_REGID -999
-
 @implementation HiScore
 
 @synthesize name;
@@ -28,7 +26,7 @@ static NSMutableArray* keyArray;
     HiScore* hiScore = [super init];
     hiScore.name = @"No Name";
     hiScore.score = 0;
-    hiScore.date = 0L;
+    hiScore.date = [[NSDate alloc] initWithTimeIntervalSince1970:0];
     hiScore.registeredId = DEFAULT_REGID;
     return hiScore;
 }
@@ -47,7 +45,7 @@ static NSMutableArray* keyArray;
         HiScore* hiScore = [[HiScore alloc] init];
         hiScore.name  = [defaults stringForKey:[nameKeyArray objectAtIndex:i]];
         hiScore.score = [defaults integerForKey:[scoreKeyArray objectAtIndex:i]];
-        hiScore.date  = [[defaults objectForKey:[dateKeyArray objectAtIndex:i]] longValue];
+        hiScore.date  = [defaults objectForKey:[dateKeyArray objectAtIndex:i]];
         hiScore.registeredId = [defaults integerForKey:[regidKeyArray objectAtIndex:i]];
         
         if(hiScore.name == nil){
@@ -73,11 +71,11 @@ static NSMutableArray* keyArray;
     for(int i=0;i<5;i++){
         HiScore* hiScore = [hiScoreArray objectAtIndex:i];
         
-//        [hiScore print];
+        [hiScore print];
         
         [defaults setObject:hiScore.name forKey:[nameKeyArray objectAtIndex:i]];
         [defaults setInteger:hiScore.score forKey:[scoreKeyArray objectAtIndex:i]];
-        [defaults setObject:[NSNumber numberWithLong:hiScore.date] forKey:[dateKeyArray objectAtIndex:i]];
+        [defaults setObject:hiScore.date forKey:[dateKeyArray objectAtIndex:i]];
         [defaults setInteger:hiScore.registeredId forKey:[regidKeyArray objectAtIndex:i]];
     }
     
@@ -98,7 +96,7 @@ static NSMutableArray* keyArray;
 
 + (NSString*)getLastRegistName {
     NSString* lastRegistName = @"";
-    long lastDate = 0L;
+    NSDate* lastDate = [[NSDate alloc] initWithTimeIntervalSince1970:0];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
@@ -107,8 +105,8 @@ static NSMutableArray* keyArray;
         NSArray* dateKeyArray  = [self getKey:KEYTYPE_DATE  gamelevel:i];
         
         for(int j=0;j<5;j++){
-            long tmpDate = [[defaults objectForKey:[dateKeyArray objectAtIndex:j]] longValue];
-            if(lastDate < tmpDate){
+            NSDate* tmpDate = [defaults objectForKey:[dateKeyArray objectAtIndex:j]];
+            if([lastDate timeIntervalSince1970] < [tmpDate timeIntervalSince1970]){
                 lastRegistName = [defaults stringForKey:[nameKeyArray objectAtIndex:j]];
                 lastDate = tmpDate;
             }
@@ -131,10 +129,6 @@ static NSMutableArray* keyArray;
                 NSMutableArray* keyArrayOfLevel = [NSMutableArray array];
                 for(int k=1;k<=5;k++){
                     NSString* keyString = [NSString stringWithFormat:@"%@%d%d",keyTypeString,j,k];
-                    
-//                    NSLog(@"index : %d %d %d",i,j,k);
-//                    NSLog(@"key : %@",keyString);
-                    
                     [keyArrayOfLevel addObject:keyString];
                 }
                 [keyArrayOfType addObject:keyArrayOfLevel];
@@ -146,6 +140,16 @@ static NSMutableArray* keyArray;
     return [[keyArray objectAtIndex:keytype] objectAtIndex:gamelevel];
 }
 
+- (NSString*)getDateStr {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    
+    NSLog(@"date : %@",[formatter stringFromDate:date]);
+    
+    return [formatter stringFromDate:date];
+}
+
 - (void)setDefault:(int)gamelevel rank:(int)rank {
     name = @"No Name";
     if(gamelevel == 2){
@@ -155,14 +159,14 @@ static NSMutableArray* keyArray;
         // 初級・中級
         score = (6-rank)*5;
     }
-    date = 0L;
+    date = [[NSDate alloc] initWithTimeIntervalSince1970:0];
     registeredId = DEFAULT_REGID;
 }
 
 - (void)print {
     NSLog(@"name : %@",name);
     NSLog(@"score : %d",score);
-    NSLog(@"date : %ld",date);
+    NSLog(@"date : %@",date);
     NSLog(@"regid : %d",registeredId);
 }
 

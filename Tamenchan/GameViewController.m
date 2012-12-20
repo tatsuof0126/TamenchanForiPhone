@@ -99,7 +99,7 @@
         BOOL* machi = [checker checkMachihai:questionTehai];
         int machiNum = 0;
         for(int i=0;i<HAI_LENGTH;i++){
-            if(machi[i] == true){
+            if(machi[i] == YES){
                 machiNum++;
             }
         }
@@ -171,7 +171,8 @@
 }
 
 - (void)updateHeader {
-    questionLabel.text = [NSString stringWithFormat:@"問題  %d / %d",question,MAX_QUESTION];
+    questionLabel.text = [NSString stringWithFormat:@"<%@>   問題  %d / %d",
+                          [TamenchanSetting getGameLevelString], question, MAX_QUESTION];
     scoreLabel.text = [NSString stringWithFormat:@"得点 : %d",score];
 }
 
@@ -210,7 +211,7 @@
 - (void)initChoiceHai {
     // 選択状態を初期化
     for(int i=0;i<HAI_LENGTH;i++){
-        choice[i] = false;
+        choice[i] = NO;
     }
     
     NSArray* haiImageArray = [Tehai getHaiImageArray:[TamenchanSetting getHaiType]];
@@ -229,7 +230,7 @@
     for (int i=0;i<9;i++) {
         UIImageView* choiceHaiImageView = [choiceHaiImage objectAtIndex:i];
         
-        if(choice[i+1]==true){
+        if(choice[i+1]==YES){
             choiceHaiImageView.alpha = 1;
         } else {
             choiceHaiImageView.alpha = 0.4;
@@ -243,10 +244,10 @@
     
     if( tag > CHOICE_HAI_TAG_BASE && tag <= CHOICE_HAI_TAG_BASE + 9){
         int touchNum = tag - CHOICE_HAI_TAG_BASE;
-        if(choice[touchNum] == true){
-            choice[touchNum] = false;
+        if(choice[touchNum] == YES){
+            choice[touchNum] = NO;
         } else {
-            choice[touchNum] = true;
+            choice[touchNum] = YES;
         }
         [self updateChoiceHai];
     }
@@ -270,6 +271,11 @@
     [super viewDidUnload];
 }
 
+- (void)replayGame {
+    // ゲームを初期化して開始
+    [self initGame];
+}
+
 - (IBAction)backButton:(id)sender {
     [showTimer invalidate];
     [questionTimer invalidate];
@@ -288,10 +294,10 @@
     BOOL* machi = [checker checkMachihai:questionTehai];
     int machiNum = 0;
     
-    bool judge = true;
+    bool judge = YES;
     for(int i=1;i<=9;i++){
         if(machi[i]!=choice[i]){
-            judge = false;
+            judge = NO;
         }
         
         if(machi[i]==YES){
@@ -302,7 +308,7 @@
     NSString* titleStr;
     NSString* messageStr;
     
-    if(judge == true){
+    if(judge == YES){
         int addScore = remainingTime / 1000 + 1;
         int bonus = [TamenchanDefine getBonusScore:machiNum];
         score += addScore + bonus;
@@ -365,7 +371,7 @@
     NSMutableString* machiStr = [NSMutableString string];
     
     for(int i=0;i<HAI_LENGTH;i++){
-        if(machi[i]==true){
+        if(machi[i]==YES){
             [machiStr appendString:[NSString stringWithFormat:@",%d",i]];
         }
     }

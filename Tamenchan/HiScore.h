@@ -10,11 +10,13 @@
 
 #define MAX_LENGTH_NAME 10
 
+#define DEFAULT_REGID -999
+
 @interface HiScore : NSObject
 
 @property NSString* name;
 @property int score;
-@property long date;
+@property NSDate* date;
 @property int registeredId;
 
 + (NSArray*)readHiScore:(int)gamelevel;
@@ -22,5 +24,7 @@
 + (void)clearHiScore:(int)gamelevel;
 
 + (NSString*)getLastRegistName;
+
+- (NSString*)getDateStr;
 
 @end

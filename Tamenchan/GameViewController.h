@@ -19,8 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet TimerView *timerBar;
 
-
-
 @property NSTimer* showTimer;
 @property NSTimer* questionTimer;
 
@@ -33,5 +31,7 @@
 
 - (IBAction)backButton:(id)sender;
 - (IBAction)judgeButton:(id)sender;
+
+- (void)replayGame;
 
 @end

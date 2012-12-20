@@ -38,7 +38,7 @@ static int* presetjihai3;
             hai[i] = presethai[i];
             num += presethai[i];
             for(int j=0;j<presethai[i];j++){
-                used[i*4+j] = true;
+                used[i*4+j] = YES;
             }
         }
     }
@@ -46,9 +46,9 @@ static int* presetjihai3;
     for(int i=num;i<TEHAI_LENGTH;i++){
         while (YES) {
             int tsumo = rand()%36+4;
-            if(used[tsumo] == false){
+            if(used[tsumo] == NO){
                 hai[(int)(tsumo/4)]++;
-                used[tsumo] = true;
+                used[tsumo] = YES;
                 break;
             }
         }
@@ -61,7 +61,7 @@ static int* presetjihai3;
         hai[i] = 0;
     }
     for(int i=0;i<HAI_LENGTH*4;i++){
-        used[i] = FALSE;
+        used[i] = NO;
     }
 }
 

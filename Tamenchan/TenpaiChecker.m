@@ -15,13 +15,13 @@ static NSArray* kotsuTargetArray;
 
 - (BOOL*)checkMachihai:(Tehai*)targetTehai {
     BOOL* machi = (BOOL*)malloc(sizeof(BOOL) * HAI_LENGTH);
-    machi[0] = false;
+    machi[0] = NO;
     
     // 受け取った１３枚に１〜９までの牌を１つずつ足して、上がりになるかをチェック
     for (int i=1; i<=9; i++) {
         // すでに４枚持ってたらその牌で待つことはない。
         if (targetTehai.hai[i] == 4){
-            machi[i] = false;
+            machi[i] = NO;
             continue;
         }
         
@@ -36,8 +36,8 @@ static NSArray* kotsuTargetArray;
 
 - (BOOL)isAgari:(Tehai*)checkTargetTehai {
     // まずは七対子型での上がりをチェック
-    if([self checkChitoitsu:checkTargetTehai] == true){
-        return true;
+    if([self checkChitoitsu:checkTargetTehai] == YES){
+        return YES;
     }
     
     // 以降は面子型での上がりをチェックする
@@ -67,12 +67,12 @@ static NSArray* kotsuTargetArray;
 //        [checkTargetTehaiCopy logTehai]; //LOG
         
         // その上で順子・雀頭の形なっているかをチェック、なっていれば上がり
-        if([self checkToitsuShuntsu:checkTargetTehaiCopy] == true){
-            return true;
+        if([self checkToitsuShuntsu:checkTargetTehaiCopy] == YES){
+            return YES;
         }
     }
     
-    return false;
+    return NO;
 }
 
 - (BOOL)checkChitoitsu:(Tehai*)checkTargetTehai {
@@ -85,10 +85,10 @@ static NSArray* kotsuTargetArray;
     }
     
     if(toitsuNum == 7){
-        return true;
+        return YES;
     }
     
-    return false;
+    return NO;
 }
 
 - (BOOL)checkToitsuShuntsu:(Tehai*)checkTargetTehai {
@@ -98,13 +98,13 @@ static NSArray* kotsuTargetArray;
             Tehai* checkTargetTehaiCopy = [checkTargetTehai copyTehai];
             checkTargetTehaiCopy.hai[i]-=2;
             
-            if([self checkShuntsu:checkTargetTehaiCopy] == true){
-                return true;
+            if([self checkShuntsu:checkTargetTehaiCopy] == YES){
+                return YES;
             }
         }
     }
     
-    return false;
+    return NO;
 }
 
 - (BOOL)checkShuntsu:(Tehai*)checkTargetTehai {
@@ -120,11 +120,11 @@ static NSArray* kotsuTargetArray;
     
     for(int i=0;i<HAI_LENGTH;i++){
         if(checkTargetTehai.hai[i]>=1){
-            return false;
+            return NO;
         }
     }
     
-    return true;
+    return YES;
 }
 
 + (NSArray*)getKotsuTargetArray:(int)kotsuNum {

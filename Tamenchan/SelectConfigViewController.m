@@ -70,7 +70,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
+//    NSLog(@"Selected %d-%d",indexPath.section, indexPath.row);
+    
+    // レベル選択で上級を選択した場合は、選択させてよいかをチェックする
+    if ((selecttype == TYPE_LEVEL || selecttype == TYPE_VIEW_LEVEL) &&
+        indexPath.row == 2 && [TamenchanSetting canSelectHard] == NO){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+            message:@"上級は、中級で50点以上のスコアを出すと選択できるようになります。"
+            delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
     
     if (selecttype == TYPE_LEVEL){
         [TamenchanSetting setGameLevel:indexPath.row];
@@ -81,7 +91,6 @@
         controller.viewgamelevel = indexPath.row;
     }
     
-    // targetField.text = [selectlist objectAtIndex:indexPath.row];
     [self dismissModalViewControllerAnimated:YES];
 }
 

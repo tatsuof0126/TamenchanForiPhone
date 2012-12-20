@@ -58,7 +58,8 @@ static NSArray* bonusScoreArray;
 }
 
 + (NSString*)getServerHost {
-    return @"http://tamenchanserver.herokuapp.com/";
+    return @"http://192.168.11.5:3000/";
+//    return @"http://tamenchanserver.herokuapp.com/";
 }
 
 + (NSString*)getServerPath {
