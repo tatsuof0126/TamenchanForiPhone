@@ -71,7 +71,7 @@ static NSMutableArray* keyArray;
     for(int i=0;i<5;i++){
         HiScore* hiScore = [hiScoreArray objectAtIndex:i];
         
-        [hiScore print];
+//        [hiScore print];
         
         [defaults setObject:hiScore.name forKey:[nameKeyArray objectAtIndex:i]];
         [defaults setInteger:hiScore.score forKey:[scoreKeyArray objectAtIndex:i]];

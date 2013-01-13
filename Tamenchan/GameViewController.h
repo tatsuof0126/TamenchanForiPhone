@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Tehai.h"
 #import "TimerView.h"
-#define MAX_QUESTION 2
 
 @interface GameViewController : UIViewController
 

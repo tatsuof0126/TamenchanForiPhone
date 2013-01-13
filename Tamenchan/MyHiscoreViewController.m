@@ -21,6 +21,8 @@
 #define HEADER_BUTTON_CLEAR    1
 #define HEADER_BUTTON_CONTINUE 2
 
+#define OUT_OF_RANK 99999
+
 @interface MyHiscoreViewController ()
 
 @end
@@ -37,6 +39,11 @@
 // @synthesize continueButton;
 @synthesize connecting;
 @synthesize actIndView;
+
+@synthesize rankingNum;
+@synthesize topRank;
+@synthesize topScore;
+@synthesize tweeted;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -130,21 +137,6 @@
         [gameController dismissViewControllerAnimated:YES completion:NULL];
     }
 }
-
-/*
-- (IBAction)clearButton:(id)sender {
-    HiScoreTabController* controller = (HiScoreTabController*)self.parentViewController;
-    int viewgamelevel = controller.viewgamelevel;
-    
-    NSArray* array = [TamenchanSetting getGameLevelStringArray];
-    NSString* messageStr = [NSString stringWithFormat:@"私のハイスコア＜%@＞を\n削除します。よろしいですか？",[array objectAtIndex:viewgamelevel]];
-    
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"ハイスコアの削除"
-        message:messageStr delegate:self cancelButtonTitle:@"キャンセル" otherButtonTitles:@"OK", nil];
-    [alert setTag:ALERT_CLEAR];
-    [alert show];
-}
-*/
  
 - (IBAction)registButton:(id)sender {
     //ぐるぐるを出す
@@ -165,13 +157,13 @@
     
         NSString* urlStr = [NSString stringWithFormat:@"%@%@?gamelevel=%d",
                             [TamenchanDefine getServerHost],[TamenchanDefine getServerPath],viewgamelevel];
-        // Mutableなインスタンスを作成し、インスタンスの内容を変更できるようにする
+        
         NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlStr]];
         request.HTTPMethod = @"POST";
         
         NSMutableString* bodyStr = [NSMutableString string];
         
-        NSArray* hiScoreArray = [HiScore readHiScore:controller.viewgamelevel];
+        NSArray* hiScoreArray = [HiScore readHiScore:viewgamelevel];
         for(int i=0;i<[hiScoreArray count];i++){
             HiScore* hiScore = [hiScoreArray objectAtIndex:i];
         
@@ -186,7 +178,7 @@
         
         request.HTTPBody = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSLog(@"body : %@",bodyStr);
+//        NSLog(@"body : %@",bodyStr);
         
         NSURLResponse* response;
         NSError* error;
@@ -202,52 +194,62 @@
             retArray = [NSArray array];
         }
         
-        NSLog(@"error : %@",jsonError);
-        NSLog(@"retArray : %@",retArray);
-        
-        if ([hiScoreArray count] == [retArray count]){
-            for(int i=0;i<[hiScoreArray count];i++){
-                HiScore* hiScore = [hiScoreArray objectAtIndex:i];
-                NSDictionary* hiScoreDic = [retArray objectAtIndex:i];
-                hiScore.registeredId = [[hiScoreDic objectForKey:@"id"] intValue];
-            }
-            [HiScore writeHiScore:viewgamelevel hiScoreArray:hiScoreArray];
-        }
-        
         // ぐるぐる終了
         [actIndView stopAnimating];
         connecting = NO;
         
-        // みんなのランキングへの登録件数を確認
-        int rankingNum = 0;
-        int topRank = 999;
-        for(int i=0;i<[retArray count];i++){
-            NSDictionary* hiScoreDic = [retArray objectAtIndex:i];
-            int rank = [[hiScoreDic objectForKey:@"rank"] intValue];
-            if(rank <= 100){
-                rankingNum++;
-                if(topRank > rank){
-                    topRank = rank;
+//        NSLog(@"error : %@",error);
+//        NSLog(@"jsonError : %@",jsonError);
+//        NSLog(@"retArray : %@",retArray);
+        
+        if([retArray count] >= 1){
+            if ([hiScoreArray count] == [retArray count]){
+                for(int i=0;i<[hiScoreArray count];i++){
+                    HiScore* hiScore = [hiScoreArray objectAtIndex:i];
+                    NSDictionary* hiScoreDic = [retArray objectAtIndex:i];
+                    hiScore.registeredId = [[hiScoreDic objectForKey:@"id"] intValue];
+                }
+                [HiScore writeHiScore:viewgamelevel hiScoreArray:hiScoreArray];
+            }
+        
+            // みんなのランキングへの登録件数を確認
+            rankingNum = 0;
+            topRank = OUT_OF_RANK;
+            topScore = 0;
+            for(int i=0;i<[retArray count];i++){
+                NSDictionary* hiScoreDic = [retArray objectAtIndex:i];
+                int rank = [[hiScoreDic objectForKey:@"rank"] intValue];
+                if(rank < OUT_OF_RANK){
+                    rankingNum++;
+                    if(topRank > rank){
+                        topRank = rank;
+                        topScore = [[hiScoreDic objectForKey:@"score"] intValue];
+                    }
                 }
             }
-        }
-        
-        // ダイアログ表示
-        UIAlertView* alert;
-        if(rankingNum >= 1){
-            alert = [[UIAlertView alloc] initWithTitle:@"登録されました"
-                message:[NSString stringWithFormat:@"みんなのハイスコアに %d件 \nランクインしています。\n最高位は %d位 です。",rankingNum,topRank]
-                delegate:self cancelButtonTitle:nil otherButtonTitles:@"つぶやく",@"OK",nil];
-            [alert setTag:ALERT_REGISTED_TWEET];
+            
+            // ダイアログ表示
+            UIAlertView* alert;
+            if(rankingNum >= 1){
+                NSString* msg = [NSString stringWithFormat:
+                    @"みんなのハイスコアに %d件 \nランクインしています。\n最高位は %d位 です。",rankingNum,topRank];
+                alert = [[UIAlertView alloc] initWithTitle:@"登録されました" message:msg
+                    delegate:self cancelButtonTitle:nil otherButtonTitles:@"つぶやく",@"OK",nil];
+                [alert setTag:ALERT_REGISTED_TWEET];
+            } else {
+                alert = [[UIAlertView alloc] initWithTitle:@"登録されました"
+                    message:@"みんなのハイスコアへのランクインはありません。"
+                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert setTag:ALERT_REGISTED];
+            }
+            [alert show];
         } else {
-            alert = [[UIAlertView alloc] initWithTitle:@"登録されました"
-                message:@"みんなのハイスコアへのランクインはありません。"
-                delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert setTag:ALERT_REGISTED];
+            NSString* errorMsg = [NSString stringWithFormat:
+                                  @"しばらくしてから再度お試しください。\n%@ %d", error.domain, error.code];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"登録に失敗しました"
+                message:errorMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
         }
-        
-        [alert show];
-        
     }
 }
 
@@ -259,14 +261,49 @@
             }
             break;
         case ALERT_REGISTED_TWEET:
-            NSLog(@"ALERT_REGISTED_TWEET : %d", buttonIndex);
             if(buttonIndex == 0){
-                NSLog(@"TWEET");
+                [self tweetRegisted];
             }
             break;
         default:
             break;
     }
+}
+
+- (void)tweetRegisted {
+    HiScoreTabController* tabController = (HiScoreTabController*)self.parentViewController;
+    int viewgamelevel = tabController.viewgamelevel;
+    
+    NSString* tweetString = [NSString stringWithFormat:
+        @"みんなのハイスコア<%@>に%d件ランクインしています。最高位は%d位(%d点)です。 #ためんちゃん http://bit.ly/UIlcpn ",
+        [TamenchanSetting getGameLevelString:viewgamelevel], rankingNum, topRank, topScore];
+    tweeted = NO;
+    
+    TWTweetComposeViewController* controller = [[TWTweetComposeViewController alloc] init];
+    [controller setInitialText:tweetString];
+
+    TWTweetComposeViewControllerCompletionHandler completionHandler
+    = ^(TWTweetComposeViewControllerResult result) {
+        switch (result) {
+            case TWTweetComposeViewControllerResultDone:
+                tweeted = YES;
+                break;
+            case TWTweetComposeViewControllerResultCancelled:
+                break;
+            default:
+                break;
+        }
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            if(tweeted == YES){
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                    message:@"つぶやきました" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
+    };
+    [controller setCompletionHandler:completionHandler];
+    [self presentModalViewController:controller animated:YES];
 }
 
 - (void)clearHiScore {
@@ -300,16 +337,18 @@
     NSString* messageStr = @"";
     if(messageShow == YES){
         if(seguetype == SEGUE_TYPE_RESULT){
-            messageStr = @"登録されました";
+            if(controller.tweeted == YES){
+                messageStr = @"つぶやきました";
+            } else {
+                messageStr = @"登録されました";
+            }
         } else if (seguetype == SEGUE_TYPE_GAME){
             messageStr = [NSString stringWithFormat:@"得点は%d点でした",score];
         } else if (seguetype == SEGUE_TYPE_MENU){
             messageStr = @"ハイスコアは以下の通りです";
-            // continueButton.hidden = YES;
         }
     } else {
         messageStr = @"ハイスコアは以下の通りです";
-        // continueButton.hidden = YES;
     }
     
     messageLabel.text = messageStr;
@@ -349,7 +388,6 @@
     [self setScoreLabels:nil];
     [self setMessageLabel:nil];
     [self setTitleLabel:nil];
-//     [self setContinueButton:nil];
     [self setHeaderButton:nil];
     [super viewDidUnload];
 }

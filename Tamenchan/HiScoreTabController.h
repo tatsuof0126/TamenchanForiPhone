@@ -15,6 +15,8 @@
 @interface HiScoreTabController : UITabBarController
 
 @property int seguetype;
+@property bool tweeted;
+
 @property int score;
 @property int rank;
 @property int viewgamelevel;

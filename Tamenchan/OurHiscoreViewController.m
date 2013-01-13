@@ -44,7 +44,6 @@
     
 //    [self updateTitle];
 //    [self getOurHiScore];
-
     
 }
 
@@ -82,8 +81,6 @@
         NSData* retData = [NSURLConnection sendSynchronousRequest:request
                                                 returningResponse:&response error:&error];
         
-        NSLog(@"response received");
-        
         NSArray* regHiScoreArray;
         NSError* jsonError;
         if (retData != nil) {
@@ -92,16 +89,24 @@
             regHiScoreArray = [NSArray array];
         }
         
-        NSLog(@"error : %@",jsonError);
+//        NSLog(@"error : %@",error);
+//        NSLog(@"jsonError : %@",jsonError);
         
-        [self updateOurHiScores:regHiScoreArray];
+        // ぐるぐる終了
+        [actIndView stopAnimating];
+        if( [regHiScoreArray count] >= 1){
+            [self updateOurHiScores:regHiScoreArray];
+        } else {
+            NSString* errorMsg = [NSString stringWithFormat:
+                                  @"しばらくしてから再度お試しください。\n%@ %d", error.domain, error.code];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"取得に失敗しました"
+                message:errorMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
         
         // スクロールを最上部に
         [scrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
 
-        // ぐるぐる終了
-        [actIndView stopAnimating];
-        
         connecting = NO;
 	}
 }
@@ -112,13 +117,13 @@
     }
     
     NSMutableArray* registeredHiScoreArray = [NSMutableArray array];
-    
+
     for(int i=0;i<[hiScoreArray count];i++){
         NSDictionary* hiScoreDic = [hiScoreArray objectAtIndex:i];
         RegisteredHiScore* hiScore = [RegisteredHiScore makeRegisteredHiScore:hiScoreDic];
         [registeredHiScoreArray addObject:hiScore];
     }
-    
+
     NSString* deviceId = [TamenchanSetting getDeviceId];
     
     for(int i=0;i<[registeredHiScoreArray count];i++){
@@ -128,12 +133,12 @@
         rankLabel.textAlignment = UITextAlignmentCenter;
         rankLabel.text = [NSString stringWithFormat:@"%d位",regHiScore.rank];
         rankLabel.backgroundColor = self.view.backgroundColor;
-        
+
         UILabel* nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, i*30, 170, 21)];
         nameLabel.textAlignment = UITextAlignmentLeft;
         nameLabel.text = regHiScore.name;
         nameLabel.backgroundColor = self.view.backgroundColor;
-
+        
         UILabel* scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(245, i*30, 50, 21)];
         scoreLabel.textAlignment = UITextAlignmentRight;
         scoreLabel.text = [NSString stringWithFormat:@"%d点",regHiScore.score];
@@ -175,10 +180,10 @@
 }
 
 - (void)viewDidUnload {
+    [super viewDidUnload];
     [self setActIndView:nil];
     [self setScrollView:nil];
     [self setTitleLabel:nil];
-    [super viewDidUnload];
 }
 
 - (IBAction)reloadButton:(id)sender {

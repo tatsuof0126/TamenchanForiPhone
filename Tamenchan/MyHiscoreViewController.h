@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Twitter/Twitter.h>
 
 @interface MyHiscoreViewController : UIViewController
 
@@ -21,6 +22,12 @@
 
 @property BOOL connecting;
 @property BOOL messageShow;
+
+@property int rankingNum;
+@property int topRank;
+@property int topScore;
+
+@property BOOL tweeted;
 
 // @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 

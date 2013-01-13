@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <iAd/iAd.h>
 
-@interface ConfigViewController : UIViewController
+@interface ConfigViewController : UIViewController <ADBannerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *gamelevelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *haitypeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *haitypeImage;
-
-- (IBAction)configTwitter:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 - (IBAction)backButton:(id)sender;
+
+@property (strong, nonatomic) ADBannerView *adView;
+@property BOOL bannerIsVisible;
 
 @end

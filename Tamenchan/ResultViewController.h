@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Twitter/Twitter.h>
 
 #define OUT_OF_RANK 0
 
@@ -16,6 +17,7 @@
 @property int rank;
 @property NSMutableArray* hiScoreArray;
 @property UITextField* myNameField;
+@property bool tweeted;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *showScoreLabel;

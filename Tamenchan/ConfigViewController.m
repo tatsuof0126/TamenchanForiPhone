@@ -19,6 +19,10 @@
 @synthesize gamelevelLabel;
 @synthesize haitypeLabel;
 @synthesize haitypeImage;
+@synthesize versionLabel;
+
+@synthesize adView;
+@synthesize bannerIsVisible;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,17 +37,38 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    versionLabel.text = [NSString stringWithFormat:@"ためんちゃん  version%@",version];
+    
+    adView = [[ADBannerView alloc] initWithFrame:CGRectZero];
+    adView.frame = CGRectOffset(adView.frame, -320, 0);
+    adView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifierPortrait];
+    adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    [self.view addSubview:adView];
+    adView.delegate = self;
+    bannerIsVisible = NO;
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView*)banner{
+    if (bannerIsVisible == NO){
+        banner.frame = CGRectOffset(banner.frame, 320, 44);
+        [self.view addSubview:banner];
+        bannerIsVisible = YES;
+    }
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError*)error{
+    if (bannerIsVisible == YES){
+        banner.frame = CGRectOffset(banner.frame, -320, 0);
+        bannerIsVisible = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
-- (IBAction)configTwitter:(id)sender {
-    NSLog(@"configTwitter");
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -78,6 +103,8 @@
     [self setGamelevelLabel:nil];
     [self setHaitypeLabel:nil];
     [self setHaitypeImage:nil];
+    [self setVersionLabel:nil];
     [super viewDidUnload];
 }
+
 @end

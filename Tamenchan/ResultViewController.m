@@ -24,6 +24,7 @@
 @synthesize scrollView;
 @synthesize showScoreLabel;
 @synthesize showRankLabel;
+@synthesize tweeted;
 
 @synthesize hiScoreArray;
 @synthesize nameLabels;
@@ -49,6 +50,7 @@
     
     // 順位を初期化
     rank = OUT_OF_RANK;
+    tweeted = NO;
     
     int gamelevel = [TamenchanSetting getGameLevel];
     hiScoreArray = [NSMutableArray arrayWithArray:[HiScore readHiScore:gamelevel]];
@@ -116,11 +118,7 @@
         return;
     }
     
-    HiScore* hiScore = [hiScoreArray objectAtIndex:rank-1];
-    hiScore.name = myNameField.text;
-    
-    // 保存処理
-    [HiScore writeHiScore:[TamenchanSetting getGameLevel] hiScoreArray:hiScoreArray];
+    [self save];
     
     [self performSegueWithIdentifier:@"savedsegue" sender:self];
 }
@@ -130,17 +128,41 @@
         return;
     }
     
-    // 仮実装
-    [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    NSString* gameLevelString = [TamenchanSetting getGameLevelString];
     
-    /*
-    戻りたいとこのViewController(その例の場合画面A)にdismissを送る
-    と、APIドキュメントの
-dismissViewControllerAnimated:completion:
-dismissModalViewControllerAnimated:
-    の説明のところに書いてある
-     */
+    TWTweetComposeViewController* controller = [[TWTweetComposeViewController alloc] init];
+    [controller setInitialText:[NSString stringWithFormat:@"%@さんの得点<%@>は%d点でした。 #ためんちゃん http://bit.ly/UIlcpn ",myNameField.text,gameLevelString,score]];
+    TWTweetComposeViewControllerCompletionHandler completionHandler
+            = ^(TWTweetComposeViewControllerResult result) {
+        switch (result) {
+            case TWTweetComposeViewControllerResultDone:
+                tweeted = YES;
+                [self save];
+                break;
+            case TWTweetComposeViewControllerResultCancelled:
+                break;
+            default:
+                break;
+        }
+                
+        [self dismissViewControllerAnimated:YES completion:^{
+            if( tweeted == YES ){
+                [self performSegueWithIdentifier:@"savedsegue" sender:self];
+            }
+        }];
+        
+//        [self dismissModalViewControllerAnimated:YES];
+ };
+    [controller setCompletionHandler:completionHandler];
+    [self presentModalViewController:controller animated:YES];
+}
 
+- (void)save {
+    HiScore* hiScore = [hiScoreArray objectAtIndex:rank-1];
+    hiScore.name = myNameField.text;
+    
+    // 保存処理
+    [HiScore writeHiScore:[TamenchanSetting getGameLevel] hiScoreArray:hiScoreArray];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -149,6 +171,7 @@ dismissModalViewControllerAnimated:
         controller.seguetype = SEGUE_TYPE_RESULT;
         controller.score = score;
         controller.rank = rank;
+        controller.tweeted = tweeted;
     }
 }
 

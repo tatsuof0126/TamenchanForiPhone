@@ -17,6 +17,7 @@
 #import "HiScore.h"
 
 #define CHOICE_HAI_TAG_BASE 100
+#define MAX_QUESTION 5
 #define RARE_MACHI 7
 
 @interface GameViewController ()
