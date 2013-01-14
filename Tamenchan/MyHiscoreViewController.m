@@ -368,16 +368,20 @@
     
     for(int i=0;i<[hiScoreArray count];i++){
         HiScore* hiScore = [hiScoreArray objectAtIndex:i];
+        UILabel* rankLabel = [rankLabels objectAtIndex:i];
         UILabel* nameLabel = [nameLabels objectAtIndex:i];
         UILabel* scoreLabel = [scoreLabels objectAtIndex:i];
         nameLabel.text = hiScore.name;
         scoreLabel.text = [NSString stringWithFormat:@"%d点",hiScore.score];
         
         if(messageShow == YES && controller.rank == (i+1)){
-            UILabel* rankLabel = [rankLabels objectAtIndex:i];
             rankLabel.textColor = [UIColor redColor];
             nameLabel.textColor = [UIColor redColor];
             scoreLabel.textColor = [UIColor redColor];
+        } else {
+            rankLabel.textColor = [UIColor blackColor];
+            nameLabel.textColor = [UIColor blackColor];
+            scoreLabel.textColor = [UIColor blackColor];
         }
     }
 }

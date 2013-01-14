@@ -145,7 +145,7 @@ static NSMutableArray* keyArray;
     [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
     [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     
-    NSLog(@"date : %@",[formatter stringFromDate:date]);
+//    NSLog(@"date : %@",[formatter stringFromDate:date]);
     
     return [formatter stringFromDate:date];
 }

@@ -814,15 +814,15 @@
 		0BBC72EB1631A9F10065C46C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tatsuo Fujiwara (59Q7GGKNL2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tatsuo Fujiwara (59Q7GGKNL2)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tatsuo Fujiwara";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tatsuo Fujiwara";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tamenchan/Tamenchan-Prefix.pch";
 				INFOPLIST_FILE = "Tamenchan/Tamenchan-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AFF36A74-52E4-4DD1-B725-9103A98DBCDE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AFF36A74-52E4-4DD1-B725-9103A98DBCDE";
+				PROVISIONING_PROFILE = "9915646A-B1E8-4322-A41B-B3CFD32D7DDD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9915646A-B1E8-4322-A41B-B3CFD32D7DDD";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

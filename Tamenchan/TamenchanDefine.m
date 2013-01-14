@@ -13,6 +13,15 @@
 static NSArray* targetMachiNumArray;
 static NSArray* bonusScoreArray;
 
++ (NSString*)getServerHost {
+    return @"http://tamenchanserver.herokuapp.com/";
+//    return @"http://192.168.11.7:3000/";
+}
+
++ (NSString*)getServerPath {
+    return @"hiscorelist";
+}
+
 + (int)getTargetMachiNum {
     if(targetMachiNumArray == nil){
         NSNumber* n0 = [NSNumber numberWithInt:0];
@@ -55,15 +64,6 @@ static NSArray* bonusScoreArray;
     }
     
     return [[bonusScoreArray objectAtIndex:machiNum] intValue];    
-}
-
-+ (NSString*)getServerHost {
-//    return @"http://192.168.11.7:3000/";
-    return @"http://tamenchanserver.herokuapp.com/";
-}
-
-+ (NSString*)getServerPath {
-    return @"hiscorelist";
 }
 
 @end
