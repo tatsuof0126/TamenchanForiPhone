@@ -34,7 +34,7 @@
 @synthesize rankLabels;
 @synthesize nameLabels;
 @synthesize scoreLabels;
-@synthesize messageShow;
+// @synthesize messageShow;
 @synthesize headerButton;
 // @synthesize continueButton;
 @synthesize connecting;
@@ -58,7 +58,8 @@
 {
     [super viewDidLoad];
     
-    messageShow = YES;
+    HiScoreTabController* controller = (HiScoreTabController*)self.parentViewController;
+    controller.messageShow = YES;
     
     // rankLabels,nameLabels,scoreLabelsを正しい順番に並び替え
     rankLabels = [rankLabels sortedArrayUsingSelector:@selector(compare:)];
@@ -98,7 +99,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // メッセージを固定文言にする
-    messageShow = NO;
+    HiScoreTabController* controller = (HiScoreTabController*)self.parentViewController;
+    controller.messageShow = NO;
     
     NSString* segueStr = [segue identifier];    
     SelectConfigViewController *viewController = [segue destinationViewController];
@@ -335,7 +337,7 @@
     int seguetype = controller.seguetype;
     
     NSString* messageStr = @"";
-    if(messageShow == YES){
+    if(controller.messageShow == YES){
         if(seguetype == SEGUE_TYPE_RESULT){
             if(controller.tweeted == YES){
                 messageStr = @"つぶやきました";
@@ -374,7 +376,7 @@
         nameLabel.text = hiScore.name;
         scoreLabel.text = [NSString stringWithFormat:@"%d点",hiScore.score];
         
-        if(messageShow == YES && controller.rank == (i+1)){
+        if(controller.messageShow == YES && controller.rank == (i+1)){
             rankLabel.textColor = [UIColor redColor];
             nameLabel.textColor = [UIColor redColor];
             scoreLabel.textColor = [UIColor redColor];

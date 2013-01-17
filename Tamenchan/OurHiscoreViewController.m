@@ -160,6 +160,10 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // 私のハイスコアのメッセージを固定文言にする
+    HiScoreTabController* controller = (HiScoreTabController*)self.parentViewController;
+    controller.messageShow = NO;
+    
     NSString* segueStr = [segue identifier];
     SelectConfigViewController *viewController = [segue destinationViewController];
     if ([segueStr isEqualToString:@"level"] == YES) {

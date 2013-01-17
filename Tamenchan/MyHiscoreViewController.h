@@ -21,7 +21,7 @@
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *scoreLabels;
 
 @property BOOL connecting;
-@property BOOL messageShow;
+// @property BOOL messageShow;
 
 @property int rankingNum;
 @property int topRank;

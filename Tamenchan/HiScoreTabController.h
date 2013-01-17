@@ -17,6 +17,8 @@
 @property int seguetype;
 @property bool tweeted;
 
+@property BOOL messageShow;
+
 @property int score;
 @property int rank;
 @property int viewgamelevel;
