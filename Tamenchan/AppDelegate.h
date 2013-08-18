@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InAppPurchaseManager.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (strong, nonatomic) InAppPurchaseManager* purchaseManager;
+
 + (void)adjustForiPhone5:(UIView*)view;
+
+- (InAppPurchaseManager*)getInAppPurchaseManager;
 
 @end

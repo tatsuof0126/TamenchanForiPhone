@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define MY_BANNER_UNIT_ID	@"a15210c066d36c4"
+
 @interface TamenchanDefine : NSObject
 
 + (int)getTargetMachiNum;

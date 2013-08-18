@@ -54,6 +54,23 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // Admob用コード
+    if([TamenchanSetting isRemoveAdsFlg] == NO){
+        GADBannerView *bannerView_ =[[GADBannerView alloc]
+            initWithFrame:CGRectMake(0.0, self.view.frame.size.height-GAD_SIZE_320x50.height,
+                                     GAD_SIZE_320x50.width, GAD_SIZE_320x50.height)];
+        
+        bannerView_.adUnitID = MY_BANNER_UNIT_ID;
+        bannerView_.delegate = self;
+        bannerView_.rootViewController = self;
+        [self.view addSubview:bannerView_];
+        
+        // 一般的なリクエストを行って広告を読み込む。
+        GADRequest *rq = [GADRequest request];
+        // rq.testing = YES;
+        [bannerView_ loadRequest:rq];
+    }
+    
     // 乱数を初期化
     srand([[NSDate date] timeIntervalSinceReferenceDate]);
     

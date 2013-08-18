@@ -44,4 +44,8 @@
 
 + (void)setSelectHard:(BOOL)selectHard;
 
++ (BOOL)isRemoveAdsFlg;
+
++ (void)setRemoveAdsFlg:(BOOL)removeAdsFlg;
+
 @end

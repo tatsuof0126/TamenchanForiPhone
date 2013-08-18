@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Tehai.h"
 #import "TimerView.h"
+#import "GADBannerView.h"
 
-@interface GameViewController : UIViewController
+@interface GameViewController : UIViewController <GADBannerViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tehaiImage;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *choiceHaiImage;

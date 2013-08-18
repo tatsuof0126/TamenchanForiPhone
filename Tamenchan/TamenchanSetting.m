@@ -103,4 +103,15 @@ static NSArray* haiTypeImageStringArray;
     [defaults synchronize];
 }
 
++ (BOOL)isRemoveAdsFlg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:@"REMOVEADSFLG"];
+}
+
++ (void)setRemoveAdsFlg:(BOOL)removeAdsFlg {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:removeAdsFlg forKey:@"REMOVEADSFLG"];
+    [defaults synchronize];
+}
+
 @end

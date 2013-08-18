@@ -9,6 +9,7 @@
 #import "ConfigViewController.h"
 #import "SelectConfigViewController.h"
 #import "TamenchanSetting.h"
+#import "AppDelegate.h"
 
 @interface ConfigViewController ()
 
@@ -23,6 +24,9 @@
 
 @synthesize adView;
 @synthesize bannerIsVisible;
+
+@synthesize doingPurchase;
+@synthesize actIndView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,11 +52,17 @@
     [self.view addSubview:adView];
     adView.delegate = self;
     bannerIsVisible = NO;
+    
+    if([TamenchanSetting isRemoveAdsFlg] == YES){
+        _removeadsButton.hidden = YES;
+        _restoreButton.hidden = YES;
+    }
 }
 
 - (void)bannerViewDidLoadAd:(ADBannerView*)banner{
-    if (bannerIsVisible == NO){
-        banner.frame = CGRectOffset(banner.frame, 320, 44);
+    if (bannerIsVisible == NO && [TamenchanSetting isRemoveAdsFlg] == NO){
+        banner.frame = CGRectMake(0, 44, banner.frame.size.width, banner.frame.size.height);
+//        banner.frame = CGRectOffset(banner.frame, 320, 44);
         [self.view addSubview:banner];
         bannerIsVisible = YES;
     }
@@ -87,6 +97,75 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (IBAction)removeadsButton:(id)sender {
+    // 購入処理中なら処理しない
+    if(doingPurchase == YES){
+        return;
+    }
+    
+    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    InAppPurchaseManager* purchaseManager = [delegate getInAppPurchaseManager];
+    
+    // アプリ内課金が許可されていない場合はダイアログを出す
+    if(purchaseManager.canMakePurchases == NO){
+        UIAlertView *alert = [ [UIAlertView alloc] initWithTitle:@""
+            message:@"アプリ内での購入が許可されていません。設定を確認してください。" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    // 購入処理開始
+    doingPurchase = YES;
+    
+    // 自分自身の参照をセット
+    purchaseManager.source = self;
+    
+    //ぐるぐるを出す
+    actIndView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 60.0f, 60.0f)];
+    [actIndView setCenter:self.view.center];
+    [actIndView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:actIndView];
+    [actIndView startAnimating];
+    
+    // アプリ内課金を呼び出し
+    [purchaseManager requestProductData:@"removeads"];
+}
+
+- (IBAction)restoreButton:(id)sender {
+    // 購入処理中なら処理しない
+    if(doingPurchase == YES){
+        return;
+    }
+    
+    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    InAppPurchaseManager* purchaseManager = [delegate getInAppPurchaseManager];
+    
+    // アプリ内課金が許可されていない場合はダイアログを出す
+    if(purchaseManager.canMakePurchases == NO){
+        UIAlertView *alert = [ [UIAlertView alloc] initWithTitle:@""
+            message:@"アプリ内での購入が許可されていません。設定を確認してください。" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    // 購入処理開始
+    doingPurchase = YES;
+    
+    // 自分自身の参照をセット
+    purchaseManager.source = self;
+    
+    // アプリ内課金（リストア）を呼び出し
+    [purchaseManager restoreProduct];
+}
+
+- (void)endConnecting {
+    [actIndView stopAnimating];
+}
+
+- (void)endPurchase {
+    doingPurchase = NO;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -104,6 +183,8 @@
     [self setHaitypeLabel:nil];
     [self setHaitypeImage:nil];
     [self setVersionLabel:nil];
+    [self setRemoveadsButton:nil];
+    [self setRestoreButton:nil];
     [super viewDidUnload];
 }
 
